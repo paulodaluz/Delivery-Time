@@ -1,0 +1,32 @@
+{
+  "name": "app-correios",
+  "version": "1.0.0",
+  "description": "Mail application to calculate price and delivery price",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paulodaluz/Prazo-de-Entregas.git"
+  },
+  "author": "Paulo da Luz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/paulodaluz/Prazo-de-Entregas/issues"
+  },
+  "homepage": "https://github.com/paulodaluz/Prazo-de-Entregas#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "jsonwebtoken": "^8.5.1",
+    "mysql": "^2.15.0",
+    "typeorm": "^0.2.0",
+    "reflect-metadata": "^0.1.10",
+    "swagger-ui-express": "^4.0.2",
+    "express-validator": "^5.3.1",
+    "nodemon": "1.18.4",
+    "concurrently": "^3.4.0",
+    "node-correios": "^2.2.0"
+  }
+}
