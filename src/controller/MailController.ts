@@ -1,14 +1,34 @@
 import { Request, Response } from "express";
-import { getManager, In } from "typeorm";
 import { } from "express-validator";
-import Axios, {} from "axios";
+var Correios = require('node-correios'), correios = new Correios();
+import * as bodyParser from "body-parser";
 
 
-export async function ComData(request: Request, response: Response) {
-    
+const d = require("../config/ShippingLocation").DepartureLocation;
 
-}
+export async function teste(request: Request, response: Response) {
+    console.log("oi")
+    var args = {
+        nCdEmpresa: d.nCdEmpresa,
+        nDsSenha: d.nDsSenha,
+        nCdServico: '40010,41106,40215',
+        sCepOrigem: d.sCepOrigem,
+        sCepDestino: request.body.request.address.postalCode,
+        nVlPeso: request.body.request.order.items.weight,
+        nCdFormato: request.body.request.order.items.taxCode,
+        nVlComprimento: request.body.request.order.items.length,
+        nVlAltura: request.body.request.order.items.height,
+        nVlLargura: request.body.request.order.items.width,
+        nVlDiametro: "0",
+        sCdMaoPropria: d.sCdMaoPropria,
+        nVlValorDeclarado: request.body.request.order.rawTotalPrice,
+        sCdAvisoRecebimento: d.sCdAvisoRecebimento
 
-export async function SemData(request: Request, response: Response) {
+    }
+
+    correios.calcPrecoPrazo(args, function (err, result) {
+        console.log(result);
+        console.log(err);
+    });
 
 }

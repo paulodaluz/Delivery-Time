@@ -5,12 +5,16 @@ import { Request, Response } from "express";
 import { AppRoutesPostmen } from "./routes/PostOfficesRoutes";
 import { GenerateToken } from "./routes/GenerateToken";
 import * as bodyParser from "body-parser";
+import * as swaggerUi from 'swagger-ui-express';
+const expressValidator = require ("express-validator");
 const authMiddleware = require("./middlewares/auth");
 
 
 createConnection().then(async connection => {
     //Importing express function
     const app = express();
+    app.use(bodyParser.json());
+    app.use(expressValidator());
 
     //Register all connections from AppRoutesPostmen using a forEach
     AppRoutesPostmen.forEach(route => {
