@@ -1,32 +1,49 @@
 {
-  "name": "app-correios",
-  "version": "1.0.0",
-  "description": "Mail application to calculate price and delivery price",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "name": "typeorm-typescript-express-example",
+  "version": "0.0.1",
+  "description": "An application of the post office to calculate the delivery time and the value of the freight.",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "author": {
+    "name": "Paulo da Luz",
+    "email": "paulo.daluzjr@gmail.com"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/paulodaluz/Prazo-de-Entregas.git"
+    "url": "https://github.com/paulodaluz/Prazo-de-Entregas.git"
   },
-  "author": "Paulo da Luz",
-  "license": "ISC",
   "bugs": {
-    "url": "https://github.com/paulodaluz/Prazo-de-Entregas/issues"
+    "url": "https://github.com/paulodaluz/Prazo-de-Entregas.git"
   },
-  "homepage": "https://github.com/paulodaluz/Prazo-de-Entregas#readme",
+  "tags": [
+    "orm",
+    "typescript",
+    "typescript-orm",
+    "typeorm-sample",
+    "typeorm-example",
+    "typeorm-express-example"
+  ],
+  "devDependencies": {
+    "@types/body-parser": "^1.16.8",
+    "@types/express": "^4.11.1",
+    "@types/node": "^9.6.5",
+    "typescript": "^2.8.1"
+  },
   "dependencies": {
     "body-parser": "^1.18.2",
+    "concurrently": "^3.4.0",
     "express": "^4.16.3",
+    "express-validator": "^5.3.1",
     "jsonwebtoken": "^8.5.1",
     "mysql": "^2.15.0",
-    "typeorm": "^0.2.0",
+    "nodemon": "1.18.4",
     "reflect-metadata": "^0.1.10",
     "swagger-ui-express": "^4.0.2",
-    "express-validator": "^5.3.1",
-    "nodemon": "1.18.4",
-    "concurrently": "^3.4.0",
-    "node-correios": "^2.2.0"
+    "typeorm": "^0.2.0"
+  },
+  "scripts": {
+    "watch": "tsc -w",
+    "server": "nodemon js/index.js",
+    "start": "concurrently \"npm run watch\" \"npm run server\""
   }
 }
