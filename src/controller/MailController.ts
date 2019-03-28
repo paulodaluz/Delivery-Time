@@ -3,11 +3,9 @@ import { getManager, In } from "typeorm";
 import { } from "express-validator";
 
 
-
 export async function ComData(request: Request, response: Response) {
 
-    response.send("oi")
-
+    response.send("test")
 
 }
 

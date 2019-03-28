@@ -12,6 +12,7 @@ createConnection().then(async connection => {
     //Importing express function
     const app = express();
 
+    //Register all connections from AppRoutesPostmen using a forEach
     AppRoutesPostmen.forEach(route => {
         app[route.method](route.path, authMiddleware, (request: Request, response: Response, next: Function) => {
             route.action(request, response)
@@ -19,7 +20,8 @@ createConnection().then(async connection => {
                 .catch(err => next(err));
         });
     });
-
+    
+   //Register all connections from GenerateToken using a forEach
    GenerateToken.forEach(route => {
         app[route.method](route.path, (request: Request, response: Response, next: Function) => {
             route.action(request, response)
@@ -32,8 +34,9 @@ createConnection().then(async connection => {
     app.listen(3002);
     
     console.log();
-    console.log("Express API is working on port 3000");
+    console.log("Express API is working on port 3002");
 
+    //Tell the user that the page does not exist when it enters a page that does not exist
     app.use((req, res) => {
         res.status(404).json({ errorCode: 404, msg: 'Page Not Found!' });
     });

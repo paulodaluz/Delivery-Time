@@ -1,5 +1,6 @@
 import { ComData } from "../controller/MailController";
 
+
 //All routes from application with it`s methods
 export const AppRoutesPostmen = [
 

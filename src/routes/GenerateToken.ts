@@ -1,6 +1,7 @@
 import { Autentificação } from "../controller/Authentication";
 
 
+//Route to create tokens
 export const GenerateToken = [
 
     {
