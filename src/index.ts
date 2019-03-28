@@ -34,6 +34,8 @@ createConnection().then(async connection => {
     console.log();
     console.log("Express API is working on port 3000");
 
-
+    app.use((req, res) => {
+        res.status(404).json({ errorCode: 404, msg: 'Pagina não encontrada!' });
+    });
 
 }).catch(error => console.log("TypeORM connection error: ", error));
