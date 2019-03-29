@@ -2,33 +2,38 @@ import { Request, Response } from "express";
 import { } from "express-validator";
 var Correios = require('node-correios'), correios = new Correios();
 import * as bodyParser from "body-parser";
+var axios = require("axios");
 
+var url = require("../config/ShippingLocation").url
 
 const d = require("../config/ShippingLocation").DepartureLocation;
 
-export async function teste(request: Request, response: Response) {
-    console.log("oi")
-    var args = {
-        nCdEmpresa: d.nCdEmpresa,
-        nDsSenha: d.nDsSenha,
-        nCdServico: '40010,41106,40215',
-        sCepOrigem: d.sCepOrigem,
-        sCepDestino: request.body.request.address.postalCode,
-        nVlPeso: request.body.request.order.items.weight,
-        nCdFormato: request.body.request.order.items.taxCode,
-        nVlComprimento: request.body.request.order.items.length,
-        nVlAltura: request.body.request.order.items.height,
-        nVlLargura: request.body.request.order.items.width,
-        nVlDiametro: "0",
-        sCdMaoPropria: d.sCdMaoPropria,
-        nVlValorDeclarado: request.body.request.order.rawTotalPrice,
-        sCdAvisoRecebimento: d.sCdAvisoRecebimento
 
+
+export async function teste(request: Request, response: Response) {
+    var items = request.body.request.order.items
+    var length = 0
+    var width = 0;
+    var weight = 0;
+    var height = 0;
+    var totalPrice = request.body.request.order.orderTotal;
+    
+    for (var i = 0; i < items.length; i++) {
+        length += parseInt(request.body.request.order.items[i].product.length)
+        width += parseInt(request.body.request.order.items[i].product.width)
+        weight += parseFloat(request.body.request.order.items[i].product.weight)
+        height += parseInt(request.body.request.order.items[i].product.height)
+    
     }
 
-    correios.calcPrecoPrazo(args, function (err, result) {
-        console.log(result);
-        console.log(err);
-    });
-
+    var x = url + `nCdServico=${d.nCdServico}&sCepOrigem=${d.sCepOrigem}&sCepDestino=${request.body.request.address.postalCode}&nVlPeso=${weight}&nCdFormato=${request.body.request.order.items[0].product.taxCode}&nVlComprimento=${length}&nVlAltura=${height}&nVlLargura=${width}&nVlDiametro=${25}&nVlValorDeclarado=${totalPrice}`
+    
+    var responseToUser = await axios.get(x, {})
+    .then(response => {
+        return (response.data.response)
+    })
+    .catch(error => {
+        console.log(error)
+    })
+    response.send(responseToUser)
 }
